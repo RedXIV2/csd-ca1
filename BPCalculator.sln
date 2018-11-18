@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BPCalculator", "BPCalculato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BPCalculatorTests", "BPCalculatorTests\BPCalculatorTests.csproj", "{E7AF1D66-86C5-437D-8B83-C7EE78BEF1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumUnitTest", "..\..\..\..\Labs\TemperatureConverterSeleniumTests\SeleniumUnitTest\SeleniumUnitTest.csproj", "{27E7DFA5-E4FA-492B-BA8E-BB875547CDE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumUnitTest", "SeleniumUnitTest\SeleniumUnitTest.csproj", "{27E7DFA5-E4FA-492B-BA8E-BB875547CDE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
