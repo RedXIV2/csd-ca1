@@ -11,7 +11,7 @@ namespace BPCalculator.Pages
     {
         public void OnGet()
         {
-            RedirectToPage("/BloodPressure");
+            
         }
     }
 }
