@@ -154,6 +154,37 @@ namespace SeleniumUnitTest
             }
         }
 
+        [TestMethod]
+        public void HighBloodPressureImageValidation()
+        {
+
+            using (IWebDriver driver = new PhantomJSDriver())
+            {
+                driver.Navigate().GoToUrl(webAppUri);
+
+                System.Diagnostics.Debug.WriteLine(driver.PageSource);
+
+
+                IWebElement diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("90");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                IWebElement bodyText = driver.FindElement(By.TagName("body"));
+                System.Diagnostics.Debug.WriteLine(bodyText.Text);
+
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+                IWebElement ambulance = driver.FindElement(By.Id("ambulanceImage"));
+
+                Assert.IsNotNull(ambulance);
+
+                //StringAssert.Contains(bodyText.Text, "Pre-High Blood Pressure");
+
+                driver.Quit();
+            }
+        }
+
         //Utility to clear text from textboxes as IWebElement.clear() has proven unreliable
         private void clearTextBox(IWebElement boxToClear)
         {
