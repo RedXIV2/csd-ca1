@@ -7,6 +7,9 @@ namespace BPCalculator
 {
     public class Startup
     {
+
+        public string ERROR_PAGE = "/Error";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,7 +33,7 @@ namespace BPCalculator
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler(ERROR_PAGE);
             }
 
             app.UseStaticFiles();

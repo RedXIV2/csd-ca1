@@ -69,28 +69,14 @@ namespace SeleniumUnitTest
                 //move focus from Systolic TextBox to allow page to automatically update
                 systolicElement.SendKeys(Keys.Tab);
 
-
-                // submit the form
-                //driver.FindElement(By.Id("convertform")).Submit();
-
+                //Grab the full body of text on the site
                 IWebElement bodyText = driver.FindElement(By.TagName("body"));
 
+                //Add Debug abilities for debugging in future
                 System.Diagnostics.Debug.WriteLine(bodyText.Text);
 
+                //Assert that the information we're looking for is in the body text
                 StringAssert.Contains(bodyText.Text, "High Blood Pressure");
-
-                // explictly wait for result with "fahrenheit" item
-                //IWebElement fahrenheitElement = new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                //Boolean rightTextShow = new WebDriverWait(driver, TimeSpan.FromSeconds(10))  
-                //.Until(ExpectedConditions.TextToBePresentInElementLocated(By.XPath("//*[@id=\"form1\"]/div[3]"), "High Blood Pressure"));
-                //.Until(ExpectedConditions.ElementExists((By.Id("fahrenheit"))));
-
-                // item comes back like "Faherheit: 50"
-                //String fahrenheit = fahrenheitElement.Text.ToString();
-
-                // 10 Celsius = 50 Fahrenheit, assert it
-                //StringAssert.EndsWith(fahrenheit, "50");
-                //Assert.Equals(rightTextShow, true);
 
                 driver.Quit();
             }
