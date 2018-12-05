@@ -27,6 +27,13 @@
                 <div class="form-group">
                     @Html.DisplayFor(model => model.BP.Category, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
+                @if (Model.BP.Category.Equals(BPCategory.High))
+                {
+                    <div class="img-thumbnail">
+                        <img src="~/images/ambulance.jpg" alt="You need to get to the Hospital">
+
+                    </div>
+                }
             }
         </form>
     </div>
