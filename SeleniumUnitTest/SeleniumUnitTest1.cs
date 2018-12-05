@@ -57,14 +57,16 @@ namespace SeleniumUnitTest
                 // web app running on IIS express
                 driver.Navigate().GoToUrl(webAppUri);
                
-                // get celsius element
+                // get Systolic element
                 IWebElement systolicElement = driver.FindElement(By.Id("BP_Systolic"));
 
-                // enter 10 in element
-                systolicElement.SendKeys(Keys.Backspace);
-                systolicElement.SendKeys(Keys.Backspace);
-                systolicElement.SendKeys(Keys.Backspace);
+                // clear text box with beautiful example of recursion
+                clearTextBox(systolicElement);
+
+                // enter 140 in element           
                 systolicElement.SendKeys("140");
+
+                //move focus from Systolic TextBox to allow page to automatically update
                 systolicElement.SendKeys(Keys.Tab);
 
 
@@ -93,5 +95,89 @@ namespace SeleniumUnitTest
                 driver.Quit();
             }
         }
+
+        [TestMethod]
+        public void PreHighBloodPressureTextValidation()
+        {
+
+            using (IWebDriver driver = new PhantomJSDriver())
+            {
+                driver.Navigate().GoToUrl(webAppUri);
+
+                IWebElement diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("80");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                IWebElement bodyText = driver.FindElement(By.TagName("body"));
+                System.Diagnostics.Debug.WriteLine(bodyText.Text);
+
+                StringAssert.Contains(bodyText.Text, "Pre-High Blood Pressure");
+
+                driver.Quit();
+            }
+        }
+
+        [TestMethod]
+        public void NormalBloodPressureTextValidation()
+        {
+            using (IWebDriver driver = new PhantomJSDriver())
+            {
+                driver.Navigate().GoToUrl(webAppUri);
+
+                IWebElement diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("50");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                IWebElement bodyText = driver.FindElement(By.TagName("body"));
+                System.Diagnostics.Debug.WriteLine(bodyText.Text);
+                StringAssert.Contains(bodyText.Text, "Normal Blood Pressure");
+
+                driver.Quit();
+            }
+        }
+
+        [TestMethod]
+        public void LowBloodPressureTextValidation()
+        {
+            using (IWebDriver driver = new PhantomJSDriver())
+            {
+                driver.Navigate().GoToUrl(webAppUri);
+
+                
+                IWebElement systolicElement = driver.FindElement(By.Id("BP_Systolic"));
+
+                clearTextBox(systolicElement);
+                systolicElement.SendKeys("70");
+                systolicElement.SendKeys(Keys.Tab);
+
+                IWebElement diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("52");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                IWebElement bodyText = driver.FindElement(By.TagName("body"));
+                System.Diagnostics.Debug.WriteLine(bodyText.Text);
+                StringAssert.Contains(bodyText.Text, "Low Blood Pressure");
+
+                driver.Quit();
+            }
+        }
+
+        //Utility to clear text from textboxes as IWebElement.clear() has proven unreliable
+        private void clearTextBox(IWebElement boxToClear)
+        {
+            if(boxToClear.GetAttribute("value").Length > 0)
+            {
+                boxToClear.SendKeys(Keys.Backspace);
+                clearTextBox(boxToClear);
+            }
+            return;
+        }
+
     }
 }
