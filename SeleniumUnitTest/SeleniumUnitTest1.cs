@@ -179,7 +179,48 @@ namespace SeleniumUnitTest
 
                 Assert.IsNotNull(ambulance);
 
-                //StringAssert.Contains(bodyText.Text, "Pre-High Blood Pressure");
+                driver.Quit();
+            }
+        }
+
+        [TestMethod]
+        public void LowBloodPressureImageValidation()
+        {
+
+            using (IWebDriver driver = new PhantomJSDriver())
+            {
+                driver.Navigate().GoToUrl(webAppUri);
+
+                System.Diagnostics.Debug.WriteLine(driver.PageSource);
+
+
+                IWebElement diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("90");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+                IWebElement ambulance = driver.FindElement(By.Id("ambulanceImage"));
+
+                Assert.IsNotNull(ambulance);
+
+                diastolicElement = driver.FindElement(By.Id("BP_Diastolic"));
+                clearTextBox(diastolicElement);
+                diastolicElement.SendKeys("50");
+                diastolicElement.SendKeys(Keys.Tab);
+
+                WebDriverWait waitAgain = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+
+                bool imagePresent;
+                try { 
+                    IWebElement ambulanceGone = driver.FindElement(By.Id("ambulanceImage"));
+                    imagePresent = true;
+                }
+                catch {
+                    imagePresent = false;
+                }
+                Assert.IsFalse(imagePresent);
 
                 driver.Quit();
             }
