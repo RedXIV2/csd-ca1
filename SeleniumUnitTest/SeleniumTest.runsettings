@@ -3,6 +3,6 @@
   <!-- Parameters used by tests at runtime -->  
   <TestRunParameters>  
     <!--<Parameter name="webAppUri" value="http://gc-temperatureconverter-qa.azurewebsites.net" />  -->
-    <Parameter name="webAppUri" value="https://davehill-stg.azurewebsites.net/bloodpressure" />
+    <Parameter name="webAppUri" value="https://davehill-qa.azurewebsites.net/bloodpressure" />
   </TestRunParameters>  
 </RunSettings> 
